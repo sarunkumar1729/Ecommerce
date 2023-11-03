@@ -1,0 +1,8 @@
+{% extends 'customer/base.html' %}
+
+{% block content %}
+<img src="{{profile.image.url}}" height="200px" width="100px">
+<h2>{{profile.c_user.username}}</h2>
+<h2>{{profile.address}}</h2>
+<h2>{{profile.phone}}</h2>
+{% endblock %}

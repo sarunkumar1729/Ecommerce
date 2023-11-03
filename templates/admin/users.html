@@ -1,0 +1,33 @@
+{% extends 'admin/base.html' %}
+
+
+{% block content %}
+<br><br><br>
+<table border="1" width="100%">
+      <thead>
+            <tr>
+                  <td>FirstName</td>
+                  <td>LastName</td>
+                  <td>Phone</td>
+                  <td>Email</td>
+                  <td>Username</td>
+                  <td>Address</td>
+                  <td>Image</td>
+            </tr>
+      </thead>
+      <tbody>
+            {% for u in users %}
+            <tr>
+                  <td>{{u.c_user.first_name}}</td>
+                  <td>{{u.c_user.last_name}}</td>
+                  <td>{{u.phone}}</td>
+                  <td>{{u.c_user.email}}</td>
+                  <td>{{u.c_user.username}}</td>
+                  <td>{{u.address}}</td>
+                  <td><img src="{{u.image.url}}" height="120" width="100"></td>
+            </tr>
+            {% endfor %}
+      </tbody>
+</table>
+
+{% endblock %}

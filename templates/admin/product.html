@@ -1,0 +1,73 @@
+{% extends 'admin/base.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<div class="cat">
+<br><br>
+<h4>ADD CATEGORY</h4>
+<form method="post" action="{% url 'add_category' %}">
+      {% csrf_token %}
+      <div class="form-group">
+        <input type="text" name="category" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter a new category for the products.....">
+      </div>
+      <input type="submit" class="btn btn-primary" value="SAVE">
+</form>
+
+
+<hr>
+
+
+<br><br>
+
+<h4>ADD PRODUCT</h4>
+<form method="post" action="{% url 'add_product' %}" enctype="multipart/form-data">
+      {% csrf_token %}
+      <input type="text" name="name" placeholder="Enter product name" class="form-control"><br><br>
+      <input type="text" name="description" placeholder="describe the product...." class="form-control"><br><br>
+      <label>choose category</label>
+      <select name="category">
+            {% for c in cat %}
+            <option value="{{ c.id }}">{{c.name}}</option>
+            {% endfor %}
+      </select><br><br>
+      <input type="number" name="price" placeholder="price" class="form-control"><br><br>
+      <input type="number" name="count" placeholder="count"  class="form-control"><br><br>
+      <input type="file" name="photo"><br><br>
+      <input type="submit" class="btn btn-primary" value="SAVE">
+</form>
+<br><br>
+</div>
+
+
+<table border="1" width="100%" cellpadding="20">
+      <thead>
+            <tr>
+                  <td>PRODUCT</td>
+                  <td>CATEGORY</td>
+                  <td>DESCRIPTION</td>
+                  <td>IMAGE</td>
+                  <td>PRICE</td>
+                  <td>QUANTITY</td>
+                  <td>ACTION</td>
+            </tr>
+      </thead>
+      <tbody>
+            {% for p in product %}
+            <tr>
+                  <td>{{p.name}}</td>
+                  <td>{{p.category.name}}</td>
+                  <td>{{p.description}}</td>
+                  <td><img src={{p.photo.url}} height="100" width="80"></td>
+                  <td>{{p.price}}</td>
+                  <td>{{p.count}}</td>
+                  <td>
+                        <a href="{% url 'delete_product' p.id %}">DELETE</a>
+                        <a href="{% url 'edit_product_page' p.id %}">EDIT</a>
+                  </td>
+            </tr>
+            {% endfor %}
+      </tbody>
+</table>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'admin/base.html' %}
+
+{% block content %}
+
+
+
+<form>
+      <label>Name</label>
+      <input type="text" value="{{product.name}}"><br><br>
+
+      <label>Choose category</label><br>
+      <select>
+            {% for c in category %}
+            <option value="{{c.id}}">{{c.name}}</option>
+            {% endfor %}
+      </select>
+
+      <br><br>
+
+      <label>Description</label>
+      <input type="text" value="{{product.description}}"><br><br>
+
+      <img src="{{product.photo.url}}" height="100" width="100">
+      <input type="file" name="photo">
+
+      <br><br>
+      
+      <label>Price</label>
+      <input type="number" value="{{product.price}}"><br><br>
+
+      <label>Quantity</label>
+      <input type="number" value="{{product.count}}">
+</form>
+
+
+
+
+{% endblock %}
